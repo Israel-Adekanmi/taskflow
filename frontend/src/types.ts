@@ -2,7 +2,7 @@ export type TaskStatus = 'pending' | 'in-progress' | 'completed';
 export type FilterStatus = 'all' | TaskStatus | 'overdue';
 
 export interface Task {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   status: TaskStatus;

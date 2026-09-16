@@ -29,7 +29,8 @@ export default function LoginPage({ onLogin, onGoSignup }: Props) {
     setLoading(true);
     try {
       const res = await authApi.login({ email, password });
-      onLogin({ token: res.accessToken, user: res.user });
+      console.log('Login response:', res);
+      onLogin({ token: res.data.accessToken, user: res.data.user });
     } catch (err) {
       setErrors({ api: err instanceof Error ? err.message : 'Login failed' });
       setLoading(false);

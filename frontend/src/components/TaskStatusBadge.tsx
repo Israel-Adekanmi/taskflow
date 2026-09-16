@@ -21,7 +21,13 @@ const config: Record<TaskStatus, { label: string; className: string }> = {
 };
 
 export default function TaskStatusBadge({ status, size = 'md' }: Props) {
-  const { label, className } = config[status];
+  const badge = config[status];
+
+if (!badge) {
+  return null;
+}
+
+const { label, className } = badge;
   const sizeClass = size === 'sm' ? 'text-xs px-1.5 py-0.5' : 'text-xs px-2 py-1';
   return (
     <span className={`inline-flex items-center rounded-full font-medium font-mono ${sizeClass} ${className}`}>

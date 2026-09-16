@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { tasksApi } from '../api';
 
 interface Props {
-  task: { id: string; title: string };
+  task: { _id: string; title: string };
   token: string;
   onDeleted: () => void;
   onCancel: () => void;
@@ -16,7 +16,7 @@ export default function DeleteTaskDialog({ task, token, onDeleted, onCancel }: P
     setLoading(true);
     setError('');
     try {
-      await tasksApi.delete(token, task.id);
+      await tasksApi.delete(token, task._id);
       onDeleted();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to delete task');

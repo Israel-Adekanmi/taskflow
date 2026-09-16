@@ -23,21 +23,31 @@ export default function EditTaskPage({ taskId, auth, onNavigate }: Props) {
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    setLoadingTask(true);
-    tasksApi.get(auth.token, taskId)
-      .then(task => {
-        setOriginal(task);
-        setForm({
-          title: task.title,
-          description: task.description ?? '',
-          status: task.status,
-          dueDate: task.dueDate.split('T')[0],
-        });
-      })
-      .catch(e => setLoadError(e instanceof Error ? e.message : 'Failed to load task'))
-      .finally(() => setLoadingTask(false));
-  }, [auth.token, taskId]);
+useEffect(() => {
+  setLoadingTask(true);
+  setLoadError('');
+
+  tasksApi
+    .get(auth.token, taskId)
+    .then(response => {
+      const task = response.data;
+
+      setOriginal(task);
+
+      setForm({
+        title: task.title,
+        description: task.description ?? '',
+        status: task.status,
+        dueDate: task.dueDate.split('T')[0],
+      });
+    })
+    .catch(e =>
+      setLoadError(
+        e instanceof Error ? e.message : 'Failed to load task',
+      ),
+    )
+    .finally(() => setLoadingTask(false));
+}, [auth.token, taskId]);
 
   function set<K extends keyof typeof form>(field: K, value: typeof form[K]) {
     setForm(prev => ({ ...prev, [field]: value }));
