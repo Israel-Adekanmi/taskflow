@@ -1,0 +1,10 @@
+{
+  "description": "Manage your tasks effortlessly with a user-friendly interface that allows you to create, view, update, and delete personal tasks while tracking their status and due dates.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
